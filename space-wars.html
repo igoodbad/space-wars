@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="space-wars">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      canvas {
+        border: 0.1em solid black;
+      }
+    </style>
+    <canvas id="canvas-game" width="700" height="500">
+      You browser don't support html5 CANVAS
+    </canvas>
+  </template>
+
+  <script>
+    /**
+     * `space-wars`
+     * space-wars
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SpaceWars extends Polymer.Element {
+      static get is() { return 'space-wars'; }
+      static get properties() {
+        return {
+          _canvas: {
+            type: Object,
+            value: () => { }
+          },
+          _pilots: {
+            type: Array,
+            value: () => []
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        this.set("_canvas", this.shadowRoot.querySelector("canvas"));
+        const canvasContext = this._canvas.getContext("2d");
+        canvasContext.fillStyle = "#fff";
+        const img = new Image();
+        img.src = "../src/full-space.png";
+        img.onload = function () {
+          canvasContext.drawImage(img, 0, 0, 700, 500);
+        };
+        let x = 0, y = 0;
+        setInterval(function () {
+          canvasContext.clearRect(0, 0, 700, 500);
+          canvasContext.drawImage(img, 0, 0, 700, 500);
+          x = (x >= 700 ? 0 : x + 1);
+          y = (y >= 500 ? 0 : y + 1);
+          canvasContext.fillRect(x, y, 10, 10);
+        }, 100 / 2);
+
+      }
+    }
+
+    window.customElements.define(SpaceWars.is, SpaceWars);
+  </script>
+</dom-module>
