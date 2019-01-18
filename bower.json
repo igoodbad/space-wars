@@ -3,7 +3,8 @@
   "description": "space-wars",
   "main": "space-wars.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "game-controls": "igoodbad/game-controls#^1.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
